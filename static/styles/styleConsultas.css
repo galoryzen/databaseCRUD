@@ -1,17 +1,28 @@
-html{
-    height: 100%;
-}
+
 
 body{
     margin: 0;
     padding: 0;
-    background: whitesmoke;
+    background-color: #8a8aa7;
     background-attachment: fixed, scroll;
+    
 }
+
+html,
+body,
+header,
+.view {
+  height: 100%;
+}
+
 .titulo{
     font-size: 64px;
     font-family: 'Merriweather Sans', sans-serif;
     color: rgb(0, 35, 100);
+    align-content: center;
+    text-align:center;
+    padding-bottom: 60px;
+    padding-top: 15px;
 }
 a{
     color: rgb(0, 132, 209);
@@ -42,7 +53,7 @@ ul{
 }
 
 .contenedor .elemento label{
-    color: #fff;
+    color: rgb(108, 111, 138);
     font-family: 'Rubik', sans-serif;
 }
 
@@ -68,6 +79,30 @@ ul{
     margin-top: 30px;
 }
 
+.center .elemento input{
+    color: #fff;
+    padding: 10px 0;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    margin-bottom: 30px;
+    font-family: 'Rubik', sans-serif;
+}
+
+.center .elemento input[type="submit"]{
+    background-color: #0063e4;
+    border: none;
+    border-radius: 5px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    padding: 15px;
+    text-transform: uppercase;
+    margin: auto;
+}
+
+
+
 .button {
     border: none;
     color: white;
@@ -79,7 +114,16 @@ ul{
     cursor: pointer;
   }
 a.Boton{
-    color:#0063e4;
+    color:#ffffff;
     text-decoration: none;
     font-size: 16px;
+    margin: 30px;
 }
+
+.center {
+    margin: auto;
+    width: 30%;
+    padding: 10px;
+   
+  }
+
