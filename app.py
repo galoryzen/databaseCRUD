@@ -17,7 +17,7 @@ def hijo():
             encoding=db_encoding
         ) as conn:
         cursor = conn.cursor()
-        cursor.execute("select * from hijo")
+        cursor.execute("select * from hijo order by id")
         data = cursor.fetchall()
         headings = [row[0] for row in cursor.description]
         conn.commit()
@@ -70,7 +70,30 @@ def delete_hijo(id):
         finally:
             return redirect(url_for('hijo'))
 
-
+@app.route('/update-hijo', methods=['POST'])
+def update_hijo():
+    with cx_Oracle.connect(
+            user=db_user,
+            password=db_password,
+            dsn=db_dsn,
+            encoding=db_encoding
+        ) as conn:
+        
+        id_hijo = request.form['id_hijo']
+        nombre_hijo = request.form['nombre_hijo']
+        id_padre = request.form['id_padre']
+        
+        if id_padre == "":
+            id_padre = "null"
+        
+        cursor = conn.cursor()
+        try:
+            cursor.execute(f"update hijo set nom='{nombre_hijo}', hijode={id_padre} where id={id_hijo}")
+            conn.commit()
+        except cx_Oracle.DatabaseError as e:
+            pass
+        finally:
+            return redirect(url_for('hijo'))
 
 @app.route('/padre.html')
 def padre():
@@ -82,7 +105,7 @@ def padre():
             encoding=db_encoding
         ) as conn:
         cursor = conn.cursor()
-        cursor.execute("select * from padre")
+        cursor.execute("select * from padre order by id")
         data = cursor.fetchall()
         headings = [row[0] for row in cursor.description]
         conn.commit()
@@ -91,7 +114,6 @@ def padre():
 
 @app.route('/create-padre', methods=['POST'])
 def create_padre():
-    print('hola')
     with cx_Oracle.connect(
             user=db_user,
             password=db_password,
@@ -131,6 +153,29 @@ def delete_padre(id):
         except cx_Oracle.DatabaseError as e:
             print(e)
             print("Hubo error")
+            pass
+        finally:
+            return redirect(url_for('padre'))
+        
+@app.route('/edit-padre', methods=['POST'])
+def edit_padre():
+    with cx_Oracle.connect(
+            user=db_user,
+            password=db_password,
+            dsn=db_dsn,
+            encoding=db_encoding
+        ) as conn:
+        
+        id_padre = request.form['id_padre']
+        nombre_padre = request.form['nombre_padre']
+        cursor = conn.cursor()
+        
+        try:
+            cursor.execute(f"update padre set nom='{nombre_padre}' where id={id_padre}")
+            conn.commit()
+        except cx_Oracle.DatabaseError as e:
+            print(e)
+            print("error")
             pass
         finally:
             return redirect(url_for('padre'))
