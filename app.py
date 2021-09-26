@@ -202,7 +202,7 @@ def consulta4():
             encoding=db_encoding
         ) as conn:
         cursor = conn.cursor()
-        cursor.execute("select padre.id, padre.nom, count(hijo.hijode) as cantidad from padre, hijo where padre.id=hijode group by padre.id, padre.nom order by cantidad desc")
+        cursor.execute("select padre.id, padre.nom, count(hijo.id) as cantidad from padre left join hijo on padre.id = hijo.hijode group by padre.id, padre.nom order by cantidad desc")
         data = cursor.fetchall()
         headings = [row[0] for row in cursor.description]
     
