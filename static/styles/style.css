@@ -5,8 +5,11 @@ body{
 }
 
 .bg{
-    background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.jpg'); 
-    height: 100%; 
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Family_Portrait.jpg/1200px-Family_Portrait.jpg'); 
+    background-attachment: fixed, scroll;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .mask{
