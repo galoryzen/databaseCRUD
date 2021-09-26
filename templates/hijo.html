@@ -25,30 +25,35 @@
                     <h1 class="font-weight-bold py-3">Hijo</h1>
                     <form id="formulario" name="formulario" method="POST" action="/create-hijo">
                         <div class="form-row">
-                            <div class="col-lg-7 px-2 pt-2">
+                            <div class="col-lg-20 px-2 pt-2">
                                 <input type="text" id="id_hijo" name="id_hijo" required="true" placeholder="id" class="form-control my-3 p-4">
                                 
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-lg-7 px-2 pt-2">
+                            <div class="col-lg-20 px-2 pt-2">
                                 <input type="text" id="nombre_hijo" name="nombre_hijo" required="true" placeholder="nombre" class="form-control my-3 p-4">
                                 
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-lg-7 px-2 pt-2">
+                            <div class="col-lg-20 px-2 pt-2">
                                 <input type="text" id="id_padre" name="id_padre" placeholder="ID del padre" class="form-control my-3 p-4">
                                 
                             </div>
                         </div>
                         <div class="form-row">
-                            
-                            <div class="col-lg-7">
+                            <div class="col-lg-20">
                                 <div class="elemento">
                                     <input type="submit" value="Ingresar"/>
                                 </div>
-                                
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-20">
+                                <div class="elemento">
+                                    <input type="submit" value="Update"/>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -56,20 +61,28 @@
             </div>
         </div>
     </section>
-    <table class="table">
-        <tr class="table__header">
-            {% for header in headings %}
-            <th class="table__cell">{{ header }}</th>
-            {% endfor %}
-        </tr>
-        {% for row in data %}
-        <tr class="table__row" id="{{row[0]}}">
-            {% for cell in row %}
-            <td class="table_cell">{{ cell }}</td>
-            {% endfor %}
-            <td class="table_cell"><a href="/deleteHijo/{{row[0]}}" class="btn btn-danger btn-sn">Delete</a></td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="panel-body">
+                    <table class="table">
+                        <tr class="table__header">
+                            {% for header in headings %}
+                            <th class="table__cell">{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for row in data %}
+                        <tr class="table__row" id="{{row[0]}}">
+                            {% for cell in row %}
+                            <td class="table_cell">{{ cell }}</td>
+                            {% endfor %}
+                            <td class="table_cell"><a href="/deleteHijo/{{row[0]}}" class="btn btn-danger btn-sn">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
