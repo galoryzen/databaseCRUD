@@ -39,12 +39,13 @@ def create_hijo():
         id_padre = request.form['id_padre']
         
         if id_padre == "":
-            id_padre = "null"
+            id_padre = None
         
         cursor = conn.cursor()
         
         try:
-            cursor.execute(f"INSERT INTO HIJO (ID, NOM, HIJODE) VALUES ({id_hijo}, '{nombre_hijo}', {id_padre})")
+            query = "INSERT INTO HIJO (ID, NOM, HIJODE) VALUES (:id_hijo, :nombre_hijo, :id_padre)"
+            cursor.execute(query, (id_hijo, nombre_hijo, id_padre))
             conn.commit()
         except cx_Oracle.DatabaseError as e:
             pass
@@ -63,7 +64,8 @@ def delete_hijo(id):
         cursor = conn.cursor()
         
         try:
-            cursor.execute(f"DELETE FROM HIJO WHERE ID={int(id)}")
+            query = "DELETE FROM HIJO WHERE ID=:id"
+            cursor.execute(query, (int(id),))
             conn.commit()
         except cx_Oracle.DatabaseError as e:
             pass
@@ -84,11 +86,12 @@ def update_hijo():
         id_padre = request.form['id_padre']
         
         if id_padre == "":
-            id_padre = "null"
+            id_padre = None
         
         cursor = conn.cursor()
         try:
-            cursor.execute(f"update hijo set nom='{nombre_hijo}', hijode={id_padre} where id={id_hijo}")
+            query = "update hijo set nom=:nombre_hijo, hijode=:id_padre where id=:id_hijo"
+            cursor.execute(query, (nombre_hijo, id_padre, id_hijo))
             conn.commit()
         except cx_Oracle.DatabaseError as e:
             pass
@@ -126,11 +129,10 @@ def create_padre():
         cursor = conn.cursor()
         
         try:
-            cursor.execute(f"INSERT INTO PADRE (ID, NOM) VALUES ({id_padre}, '{nombre_padre}')")
+            query = "INSERT INTO PADRE (ID, NOM) VALUES (:id_padre, :nombre_padre)"
+            cursor.execute(query, (id_padre, nombre_padre))
             conn.commit()
         except cx_Oracle.DatabaseError as e:
-            print(e)
-            print("error")
             pass
         finally:
             return redirect(url_for('padre'))
@@ -148,7 +150,8 @@ def delete_padre(id):
         cursor = conn.cursor()
         
         try:
-            cursor.execute(f"DELETE FROM PADRE WHERE ID={int(id)}")
+            query = "delete from padre where id=:id"
+            cursor.execute(query, (int(id), ))
             conn.commit()
         except cx_Oracle.DatabaseError as e:
             print(e)
@@ -171,11 +174,10 @@ def edit_padre():
         cursor = conn.cursor()
         
         try:
-            cursor.execute(f"update padre set nom='{nombre_padre}' where id={id_padre}")
+            query = "update padre set nom=:nombre_padre where id=:id_padre"
+            cursor.execute(query, (nombre_padre, id_padre))
             conn.commit()
         except cx_Oracle.DatabaseError as e:
-            print(e)
-            print("error")
             pass
         finally:
             return redirect(url_for('padre'))
@@ -197,7 +199,8 @@ def show_hijos():
         cursor = conn.cursor()
         
         try:
-            cursor.execute(f"select id,nom from hijo where hijode={int(id_padre)}")
+            query = "select id,nom from hijo where hijode=:id_padre"
+            cursor.execute(query, (int(id_padre), ))
             data = cursor.fetchall()
             headings = [row[0] for row in cursor.description]
             conn.commit()
