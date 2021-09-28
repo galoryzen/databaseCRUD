@@ -42,12 +42,12 @@ ul{
 }
 
 .contenedor .elemento label{
-    color: #fff;
+    color: rgb(0, 67, 250);
     font-family: 'Rubik', sans-serif;
 }
 
 .contenedor .elemento input{
-    color: #fff;
+    color: rgb(0, 67, 250);
     padding: 10px 0;
     width: 100%;
     background: transparent;
@@ -82,4 +82,7 @@ a.Boton{
     color:#9b0000;
     text-decoration: none;
     font-size: 16px;
+}
+.form-control my-3 p-4{
+    color: #9b0000;
 }
